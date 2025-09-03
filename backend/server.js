@@ -3,6 +3,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const newsRoutes = require('./routes/newsRoutes');
 
 
 // Carregar as variáveis de ambiente do .env
@@ -33,6 +34,7 @@ connectDB();
 
 // Rotas da aplicação
 app.use('/api/auth', authRoutes);
+app.use('/api/news', newsRoutes);
 
 // Rota de teste simples
 app.get('/', (req, res) => {
