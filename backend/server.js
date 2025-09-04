@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const newsRoutes = require('./routes/newsRoutes');
+const spotifyRoutes = require('./routes/spotifyRoutes');
 
 
 // Carregar as variáveis de ambiente do .env
@@ -35,6 +36,7 @@ connectDB();
 // Rotas da aplicação
 app.use('/api/auth', authRoutes);
 app.use('/api/news', newsRoutes);
+app.use('/api/spotify', spotifyRoutes);
 
 // Rota de teste simples
 app.get('/', (req, res) => {
