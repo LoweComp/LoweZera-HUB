@@ -2,10 +2,13 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const { errorHandler } = require('./middleware/errorMiddleware');
 const authRoutes = require('./routes/authRoutes');
 const newsRoutes = require('./routes/newsRoutes');
 const spotifyRoutes = require('./routes/spotifyRoutes');
 const musicRoutes = require('./routes/musicRoutes');
+
 
 
 // Carregar as variáveis de ambiente do .env
@@ -16,6 +19,9 @@ const app = express();
 
 // Middleware para entender JSON nas requisições
 app.use(express.json());
+
+// Middleware de CORS
+app.use(cors());
 
 // Conexão com o MongoDB
 const connectDB = async () => {
@@ -44,6 +50,9 @@ app.use('/api/music', musicRoutes);
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
+
+// Middleware de erro
+app.use(errorHandler);
 
 // Definir a porta do servidor
 const PORT = process.env.PORT || 5000;
