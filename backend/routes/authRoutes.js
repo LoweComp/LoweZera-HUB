@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { body, validationResult } = require('express-validator'); 
 const User = require('../models/User');
 
 // Gerar JWT
@@ -12,38 +13,49 @@ const generateToken = (id) => {
 };
 
 // Rota de Registro
-router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
-
-  try {
-    // Usuário já existe?
-    const userExists = await User.findOne({ email });
-
-    if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
+router.post(
+  '/register',
+  [
+    body('name', 'Name is required').not().isEmpty(),
+    body('email', 'Please include a valid email').isEmail(),
+    body('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
 
-    // Novo User
-    const user = await User.create({
-      name,
-      email,
-      password,
-    });
+    const { name, email, password } = req.body;
 
-    if (user) {
-      res.status(201).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        token: generateToken(user._id),
+    try {
+      const userExists = await User.findOne({ email });
+
+      if (userExists) {
+        return res.status(400).json({ message: 'User already exists' });
+      }
+
+      const user = await User.create({
+        name,
+        email,
+        password,
       });
-    } else {
-      res.status(400).json({ message: 'Invalid user data' });
+
+      if (user) {
+        res.status(201).json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          token: generateToken(user._id),
+        });
+      } else {
+        res.status(400).json({ message: 'Invalid user data' });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
     }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
   }
-});
+);
 
 // Rota de Login
 router.post('/login', async (req, res) => {
