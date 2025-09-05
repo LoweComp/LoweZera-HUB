@@ -14,15 +14,17 @@ const HomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Requisição para as notícias
         const newsResponse = await axios.get('http://localhost:5000/api/news', {
           params: { query: 'música' }
         });
         setNews(newsResponse.data.slice(0, 5));
 
-        // Requisição para os lançamentos do Spotify
         const releasesResponse = await axios.get('http://localhost:5000/api/spotify/releases');
-        setReleases(releasesResponse.data.albums.items);
+        if (releasesResponse.data && releasesResponse.data.items) {
+          setReleases(releasesResponse.data.items);
+        } else {
+          setReleases([]); 
+        }
 
         setLoading(false);
       } catch (err) {
