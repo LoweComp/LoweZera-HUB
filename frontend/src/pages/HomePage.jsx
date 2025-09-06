@@ -17,7 +17,7 @@ const HomePage = () => {
         const newsResponse = await axios.get('http://localhost:5000/api/news', {
           params: { query: 'música' }
         });
-        setNews(newsResponse.data.slice(0, 5));
+        setNews(newsResponse.data.slice(0, 6));
 
         const releasesResponse = await axios.get('http://localhost:5000/api/spotify/releases');
         if (releasesResponse.data && releasesResponse.data.items) {

@@ -3,7 +3,7 @@ import { Box, Typography, IconButton } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'; // Importa o ícone de play
 
 const MusicCard = ({ imageUrl, name, artistName, spotifyUrl }) => { 
-  console.log('URL recebida para o botão:', spotifyUrl); // Adicione esta linha
+  console.log('URL recebida para o botão:', spotifyUrl); 
   return (
     <Box
       sx={{
@@ -21,7 +21,7 @@ const MusicCard = ({ imageUrl, name, artistName, spotifyUrl }) => {
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        position: 'relative', // Importante para o posicionamento do botão
+        position: 'relative', 
         '&:hover': {
           transform: 'scale(1.03)',
           boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.5)',
@@ -44,13 +44,12 @@ const MusicCard = ({ imageUrl, name, artistName, spotifyUrl }) => {
         <Box
           sx={{
             position: 'absolute',
-            bottom: 120, // Ajuste a posição vertical do botão
-            right: 15, // Ajuste a posição horizontal do botão
+            bottom: 120, 
+            right: 15, 
             color: 'white',
             bgcolor: 'rgba(0, 0, 0, 0.5)',
             borderRadius: '50%',
             transition: 'opacity 0.3s',
-            //opacity: 0, // Inicia invisível
             '&:hover': { opacity: 1 },
             '&:hover .play-icon': { color: '#1DB954' }, 
           }}
