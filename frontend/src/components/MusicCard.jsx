@@ -1,10 +1,9 @@
 import React from 'react';
 import { Box, Typography, IconButton } from '@mui/material';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import MusicNoteIcon from '@mui/icons-material/MusicNote'; // Importa um ícone alternativo
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'; // Importa o ícone de play
 
-const MusicCard = ({ imageUrl, name, artistName, spotifyUrl }) => {
-  const finalImageUrl = imageUrl || 'https://via.placeholder.com/150'; // URL de imagem de backup
+const MusicCard = ({ imageUrl, name, artistName, spotifyUrl }) => { 
+  console.log('URL recebida para o botão:', spotifyUrl); // Adicione esta linha
   return (
     <Box
       sx={{
@@ -22,7 +21,7 @@ const MusicCard = ({ imageUrl, name, artistName, spotifyUrl }) => {
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        position: 'relative',
+        position: 'relative', // Importante para o posicionamento do botão
         '&:hover': {
           transform: 'scale(1.03)',
           boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.5)',
@@ -31,7 +30,7 @@ const MusicCard = ({ imageUrl, name, artistName, spotifyUrl }) => {
     >
       <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
         <img
-          src={finalImageUrl}
+          src={imageUrl}
           alt={name}
           style={{
             width: '100%',
@@ -41,24 +40,26 @@ const MusicCard = ({ imageUrl, name, artistName, spotifyUrl }) => {
           }}
         />
       </Box>
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: 120,
-          right: 15,
-          color: 'white',
-          bgcolor: 'rgba(0, 0, 0, 0.5)',
-          borderRadius: '50%',
-          transition: 'opacity 0.3s',
-          opacity: 0,
-          '&:hover': { opacity: 1 },
-          '&:hover .play-icon': { color: '#1DB954' },
-        }}
-      >
-        <IconButton href={spotifyUrl} target="_blank" rel="noopener noreferrer">
-          {spotifyUrl ? <PlayArrowIcon className="play-icon" sx={{ fontSize: 50 }} /> : <MusicNoteIcon sx={{ fontSize: 50 }} />}
-        </IconButton>
-      </Box>
+      {spotifyUrl && ( // Condição para renderizar o botão apenas se houver uma URL
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: 120, // Ajuste a posição vertical do botão
+            right: 15, // Ajuste a posição horizontal do botão
+            color: 'white',
+            bgcolor: 'rgba(0, 0, 0, 0.5)',
+            borderRadius: '50%',
+            transition: 'opacity 0.3s',
+            //opacity: 0, // Inicia invisível
+            '&:hover': { opacity: 1 },
+            '&:hover .play-icon': { color: '#1DB954' }, 
+          }}
+        >
+          <IconButton href={spotifyUrl} target="_blank" rel="noopener noreferrer">
+            <PlayArrowIcon className="play-icon" sx={{ fontSize: 50 }} />
+          </IconButton>
+        </Box>
+      )}
       <Typography
         variant="subtitle1"
         sx={{

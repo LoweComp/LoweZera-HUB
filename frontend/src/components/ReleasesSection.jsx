@@ -36,6 +36,7 @@ return (
           imageUrl={item.images[0]?.url}
           name={item.name}
           artistName={item.artists[0]?.name}
+          spotifyUrl={item.external_urls.spotify} 
         />
       ))}
     </Box>
