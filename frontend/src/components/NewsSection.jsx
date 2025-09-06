@@ -31,7 +31,7 @@ const NewsSection = ({ news, loading, error }) => {
         }}
       >
         {news && news
-                .filter(article => article.title && article.urlToImage) // Adiciona o filtro aqui
+                .filter(article => article.title && article.urlToImage) // Filtro de Noticias com Imagem
                 .map(article => (
                     <NewsCard
                         key={article.title}

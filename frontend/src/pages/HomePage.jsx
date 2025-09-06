@@ -17,7 +17,7 @@ const HomePage = () => {
         const newsResponse = await axios.get('http://localhost:5000/api/news', {
           params: { query: 'música' }
         });
-        setNews(newsResponse.data.slice(0, 6));
+        setNews(newsResponse.data.slice(0, 5));
 
         const releasesResponse = await axios.get('http://localhost:5000/api/spotify/releases');
         if (releasesResponse.data && releasesResponse.data.items) {
@@ -38,7 +38,14 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Box sx={{ p: 2 }}>
+    <Box
+      sx={{
+        p: 2,
+        minHeight: '100vh', 
+        background: 'linear-gradient(180deg, #2A0050 0%, #000000 100%)', // Degradê de roxo escuro para preto
+        color: '#E0E0FF', 
+      }}
+    >
       <WelcomeSection />
       <ReleasesSection releases={releases} loading={loading} error={error} />
       <NewsSection news={news} loading={loading} error={error} />

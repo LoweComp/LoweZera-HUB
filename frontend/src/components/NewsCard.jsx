@@ -7,13 +7,13 @@ const NewsCard = ({ title, imageUrl, url }) => {
       sx={{
         width: 300,
         minWidth: 300,
-        height: 380, // ALTURA FIXA PARA O CARD COMPLETO
+        height: 380, 
         backgroundColor: '#1C1C28',
         color: '#E0E0FF',
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
         borderRadius: '8px',
         transition: 'transform 0.2s',
-        display: 'flex', // Habilita Flexbox para o Card
+        display: 'flex', 
         flexDirection: 'column', // Organiza o conteúdo em coluna
         justifyContent: 'space-between', // Distribui o espaço entre os itens
         '&:hover': {
@@ -37,7 +37,7 @@ const NewsCard = ({ title, imageUrl, url }) => {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             display: '-webkit-box',
-            WebkitLineClamp: 4, // Limita o texto a 3 linhas
+            WebkitLineClamp: 4, // Limita o texto a 4 linhas
             WebkitBoxOrient: 'vertical',
           }}
         >
