@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 import WelcomeSection from '../components/WelcomeSection';
 import ReleasesSection from '../components/ReleasesSection';
 import NewsSection from '../components/NewsSection';
+import Navbar from '../components/Navbar';
 
 const HomePage = () => {
   const [news, setNews] = useState([]);
@@ -46,6 +47,7 @@ const HomePage = () => {
         color: '#E0E0FF', 
       }}
     >
+      <Navbar /> {/* Renderiza o Navbar aqui, dentro do Box */}
       <WelcomeSection />
       <ReleasesSection releases={releases} loading={loading} error={error} />
       <NewsSection news={news} loading={loading} error={error} />
